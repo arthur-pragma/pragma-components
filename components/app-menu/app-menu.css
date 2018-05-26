@@ -1,0 +1,109 @@
+app-menu {
+    position: absolute;
+    top: 3.5rem;
+    left: 0;
+    bottom: 0;
+    width: 24rem;
+    height: 100%;
+    background: rgba(57,66,88,1);
+    box-shadow: 0 16px 24px 0 rgba(0,0,0,0.30);
+
+    --app-menu-search-container-width: 100%;
+    --app-menu-search-container-height: 2rem;
+}
+
+app-menu[aria-hidden="true"] {
+    transform: translateX(-24rem);
+}
+
+app-menu nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+ul.sub-menu {
+    padding: 0 0 0 1.5rem;
+}
+
+app-menu nav ul li {
+    line-height: 3rem;
+    padding: 10px 20px;
+}
+
+app-menu nav ul li {
+    color: rgba(255,255,255,1);
+}
+
+app-menu nav ul li.divider {
+    height: 1px;
+    border-bottom: 1px solid #ddd;
+}
+
+app-menu .nav-header {
+    position: relative;
+    height: 10rem;
+    box-shadow:  inset 0 -1px 0 0 rgba(207,210,217,0.30);
+}
+
+app-menu nav ul li .icon, app-menu nav ul li a .icon {
+    fill: rgba(255,209,45,1);
+    position: relative;
+    top: 5px;
+    padding-right: 1rem;
+}
+
+app-menu nav ul li a:link {
+    font-weight: normal;
+    text-decoration: inherit;
+    color: inherit;
+    cursor: auto;
+}
+
+app-menu nav ul li a {
+    position: relative;
+    display: block;
+}
+
+app-menu nav ul li:hover {
+    background:  rgba(41,41,41,0.30);
+}
+
+app-menu nav ul li a:visited {
+    text-decoration: inherit;
+    color: inherit;
+    cursor: auto;
+}
+
+app-menu nav ul li.active {
+    font-weight: 700;
+}
+
+app-menu .nav-header .search-container {
+    width: var(--app-menu-search-container-width);
+    height: var(--app-menu-search-container-height);
+    position: absolute;
+    bottom: 0;
+}
+
+app-menu .nav-header .search-container form {
+    width: 100%;
+    height: 100%;
+}
+
+app-menu .nav-header .search-container form .search-control {
+    background: rgba(41,41,41,0.3);
+    border-radius: 4px;
+    border: none;
+    padding: 0 10px;
+    font-style: italic;
+    width: 100%;
+    height: 100%;
+}
+
+@media (min-device-width: 768px) {
+    /* desktop styles */
+    app-menu {
+        width: 24rem;
+    }
+}

@@ -1,0 +1,152 @@
+<template id="app-assistant-template">
+    <link rel="stylesheet" href="./components/app-assistant/app-assistant.css">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">
+                <h3>Actions</h3>
+            </div>
+            <div class="card-actions">
+                <ul class="list-inline">
+                    <li>
+                        <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <defs></defs>
+                            <g id="/OnKey-Assist" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.800000012">
+                                <g id="OnKey-Assist" transform="translate(-915.000000, -214.000000)">
+                                    <g id="Group-10" transform="translate(651.000000, 153.000000)">
+                                        <g id="Group" transform="translate(0.000000, 48.000000)">
+                                            <g id="Button/Primary/Light/Idle" transform="translate(16.000000, 8.000000)">
+                                                <g id="ic_arrow_drop_down_24px-copy-4" transform="translate(248.000000, 4.000000)">
+                                                    <polygon id="Stroke-1" stroke-opacity="0.00784313771" stroke="#000000" stroke-width="1.33333335e-11" points="0 0 23.9999985 0 23.9999985 23.9999985 0 23.9999985"></polygon>
+                                                    <polygon id="Fill-2" fill="#292929" points="7 10 11.9999997 14.9999997 16.9999994 10"></polygon>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="card-body">
+            Hello world!
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">
+                <h3>Actions</h3>
+            </div>
+            <div class="card-actions">
+                <ul class="list-inline">
+                    <li>
+                        <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <defs></defs>
+                            <g id="/OnKey-Assist" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.800000012">
+                                <g id="OnKey-Assist" transform="translate(-915.000000, -214.000000)">
+                                    <g id="Group-10" transform="translate(651.000000, 153.000000)">
+                                        <g id="Group" transform="translate(0.000000, 48.000000)">
+                                            <g id="Button/Primary/Light/Idle" transform="translate(16.000000, 8.000000)">
+                                                <g id="ic_arrow_drop_down_24px-copy-4" transform="translate(248.000000, 4.000000)">
+                                                    <polygon id="Stroke-1" stroke-opacity="0.00784313771" stroke="#000000" stroke-width="1.33333335e-11" points="0 0 23.9999985 0 23.9999985 23.9999985 0 23.9999985"></polygon>
+                                                    <polygon id="Fill-2" fill="#292929" points="7 10 11.9999997 14.9999997 16.9999994 10"></polygon>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="card-body">
+            Hello world!
+        </div>
+    </div>
+</template>
+
+<script>
+    if (window.templates == undefined) {
+        window.templates = new Map();
+    }
+
+    window.templates.set("app-assistant-template", document.currentScript.ownerDocument.querySelector("#app-assistant-template").content);
+</script>
+
+<script>
+    class AppAssistant extends HTMLElement {
+
+        constructor() {
+            super();
+        }
+
+        connectedCallback() {
+            this.initTemplate();
+        }
+
+        get hidden() {
+            return this.hasAttribute("hidden");
+        }
+
+        set hidden(value) {
+            this._hidden = value;
+
+            if (this._hidden) {
+                this.setAttribute("hidden", "");
+                this.setAttribute("aria-hidden", "true");
+            }
+            else {
+                this.removeAttribute("hidden");
+                this.setAttribute("aria-hidden", "false");
+            }
+        }
+
+        static get observedAttributes() {
+            return ["hidden"];
+        }
+
+        initTemplate() {
+            const instance = document.importNode(window.templates.get("app-assistant-template"), true);
+            // initialisation code of template
+
+            this.appendChild(instance);
+        }
+
+        attributeChangedCallback(name, oldValue, newValue) {
+
+            if (this.hidden) {
+                this._hidden = true;
+                this.setAttribute("aria-hidden", "true");
+            }
+            else {
+                this._hidden = false;
+                this.setAttribute("aria-hidden", "false");
+            }
+        }
+
+        toggle() {
+
+            if (this.hidden)
+                this.open();
+            else
+                this.close();
+        }
+
+        open() {
+
+            this.hidden = false;
+            this.setAttribute("aria-hidden", "false");
+        }
+
+        close() {
+
+            this.hidden = true;
+            this.setAttribute("aria-hidden", "true");
+        }
+    }
+
+    customElements.define("app-assistant", AppAssistant);
+</script>

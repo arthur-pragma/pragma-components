@@ -1,0 +1,46 @@
+app-assistant {
+    display: block;
+    position: absolute;
+    width: 19rem;
+    top: 3.5rem;
+    bottom: 0;
+    right: 0;
+    height: 100%;
+    background: #ffffff;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.10);
+    border-radius: 4px;
+}
+
+app-assistant div.card-header {
+    height: 3rem;
+    background: rgba(240,242,245,0.50);
+}
+
+app-assistant[aria-hidden="true"] {
+    transform: translateX(19rem);
+}
+
+.card {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    background: #e8e8e8;
+    padding: 0 10px;
+}
+
+.card-body {
+    background: #ffffff;
+    padding: 10px;
+}
+
+.card-header .card-title {
+    flex: 1;
+}
+
+.card-header .card-actions ul li {
+    width: 3rem;
+    text-align: center;
+}

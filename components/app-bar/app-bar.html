@@ -1,0 +1,107 @@
+<template id="app-bar-template">
+    <link rel="stylesheet" href="./components/app-bar/app-bar.css">
+    <header role="banner">
+        <nav role="navigation">
+            <ul>
+                <li>
+                    <button id="app-bar-button">
+                        <svg width="26" height="26" xmlns="http://www.w3.org/2000/svg" class="app-bar-icon">
+                            <g fill="none" fill-rule="evenodd">
+                                <path stroke-opacity=".008" stroke="#000" stroke-width=".667" d="M1 1h24v24H1z" />
+                                <path d="M4 19h18v-2H4v2zm0-5h18v-2H4v2zm0-7v2h18V7H4z" fill="#FFF" />
+                            </g>
+                        </svg>
+                    </button>
+                </li>
+                <li class="app-title-container">
+                    <h1 class="app-bar-title">Pragma Views</h1>
+                </li>
+                <li class="search-box">
+                    <div class="search-container">
+                        <form role="search">
+                            <input class="search-control" type="search" placeholder="Search or go to record" />
+                        </form>
+                    </div>
+                </li>
+                <li class="icon">
+                    <button>
+                        <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" class="app-bar-icon">
+                            <path d="M12 22c1.1 0 2-.9 2-2h-4a2 2 0 0 0 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"
+                            />
+                        </svg>
+                    </button>
+                </li>
+                <li class="icon">
+                    <button id="assist-button">
+                        <svg width="26" height="26" xmlns="http://www.w3.org/2000/svg" class="app-bar-icon">
+                            <g fill="none" fill-rule="evenodd">
+                                <path stroke-opacity=".008" stroke="#000" stroke-width=".667" d="M1 1h24v24H1z" />
+                                <path d="M21.725 15.956c-1.093 3.582-4.999 6.027-8.633 6.027A9.09 9.09 0 0 1 4 12.893c0-.987.182-2.065.493-2.998 1.006-3.016 3.682-5.24 6.747-5.891v3.8a5.418 5.418 0 0 0-3.57 5.088 5.42 5.42 0 0 0 5.422 5.42 5.416 5.416 0 0 0 5.084-3.558h3.82a8.84 8.84 0 0 1-.271 1.202z"
+                                      fill="#FFF" />
+                                <path fill="#FFD12D" d="M13.692 4v3.672h4.538v4.574h3.708V4h-8.246z" />
+                            </g>
+                        </svg>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+</template>
+
+<script>
+    if (window.templates == undefined) {
+        window.templates = new Map();
+    }
+
+    window.templates.set("app-bar-template", document.currentScript.ownerDocument.querySelector("#app-bar-template").content);
+</script>
+
+<script>
+    class AppBar extends HTMLElement {
+
+        constructor() {
+            super();
+
+            this.buttonClickHandler = this.onMenuButtonClick.bind(this);
+            this.assistButtonClickHandler = this.onAssistButtonClick.bind(this);
+        }
+
+        connectedCallback() {
+            this.initTemplate();
+
+            const menuButton = this.querySelector('#app-bar-button');
+            const assistButton = this.querySelector("#assist-button");
+
+            menuButton.addEventListener('click', this.buttonClickHandler);
+            assistButton.addEventListener("click", this.assistButtonClickHandler);
+        }
+
+        onMenuButtonClick() {
+            const menu = document.querySelector('app-menu');
+
+            if (menu)
+                menu.toggle();
+        }
+
+        onAssistButtonClick() {
+            const assistant = document.querySelector("app-assistant");
+
+            if(assistant)
+                assistant.toggle();
+        }
+
+        disconnectedCallback() {
+            this.removeEventListener("click", this.buttonClickHandler);
+            this.removeEventListener("click", this.assistButtonClickHandler);
+        }
+
+        initTemplate() {
+            const instance = document.importNode(window.templates.get("app-bar-template"), true);
+            // initialisation code of template
+
+            this.appendChild(instance);
+        }
+    }
+
+    customElements.define('app-bar', AppBar);
+</script>

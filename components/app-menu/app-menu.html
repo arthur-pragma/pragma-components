@@ -1,0 +1,99 @@
+<template></template>
+
+<template id="app-menu-template">
+    <link rel="stylesheet" href="./components/app-menu/app-menu.css">
+</template>
+
+<script>
+    if (window.templates == undefined) {
+        window.templates = new Map();
+    }
+
+    window.templates.set("app-menu-template", document.currentScript.ownerDocument.querySelector("#app-menu-template").content);
+</script>
+
+<script type="module">
+
+    class AppMenu extends HTMLElement{
+
+        constructor() {
+            super();
+        }
+
+        connectedCallback() {
+
+            this.initTemplate();
+
+            if (this.hidden)
+                this.setAttribute("aria-hidden", "true");
+            else
+                this.setAttribute("aria-hidden", "false");
+        }
+
+        disconnectedCallback() {
+
+        }
+
+        get hidden() {
+            return this.hasAttribute("hidden");
+        }
+
+        set hidden(value) {
+           this._hidden = value;
+
+           if(this._hidden) {
+               this.setAttribute("hidden", "");
+               this.setAttribute("aria-hidden", "true");
+           }
+           else {
+               this.removeAttribute("hidden");
+               this.setAttribute("aria-hidden", "false");
+           }
+        }
+
+        static get observedAttributes() {
+            return ["hidden"];
+        }
+
+        attributeChangedCallback(name, oldValue, newValue) {
+
+            if(this.hidden) {
+                this._hidden = true;
+                this.setAttribute("aria-hidden", "true");
+            }
+            else {
+                this._hidden = false;
+                this.setAttribute("aria-hidden", "false");
+            }
+        }
+
+        toggle() {
+
+            if(this.hidden)
+                this.open();
+            else
+                this.close();
+        }
+
+        open() {
+
+            this.hidden = false;
+            this.setAttribute("aria-hidden", "false");
+        }
+
+        close() {
+
+            this.hidden = true;
+            this.setAttribute("aria-hidden", "true");
+        }
+
+        initTemplate() {
+            const instance = document.importNode(window.templates.get("app-menu-template"), true);
+            // initialisation code of template
+
+            this.appendChild(instance);
+        }
+    }
+
+    customElements.define('app-menu', AppMenu);
+</script>
